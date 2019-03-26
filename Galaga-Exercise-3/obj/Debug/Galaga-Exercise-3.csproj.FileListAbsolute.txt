@@ -1,0 +1,10 @@
+/Users/Muse/Desktop/SU19-Exercise2/Galaga-Exercise-3/bin/Debug/Galaga-Exercise-3.exe
+/Users/Muse/Desktop/SU19-Exercise2/Galaga-Exercise-3/bin/Debug/Galaga-Exercise-3.pdb
+/Users/Muse/Desktop/SU19-Exercise2/Galaga-Exercise-3/bin/Debug/DIKUArcade.dll
+/Users/Muse/Desktop/SU19-Exercise2/Galaga-Exercise-3/bin/Debug/OpenTK.dll
+/Users/Muse/Desktop/SU19-Exercise2/Galaga-Exercise-3/bin/Debug/DIKUArcade.pdb
+/Users/Muse/Desktop/SU19-Exercise2/Galaga-Exercise-3/bin/Debug/OpenTK.xml
+/Users/Muse/Desktop/SU19-Exercise2/Galaga-Exercise-3/obj/Debug/Galaga-Exercise-3.csprojResolveAssemblyReference.cache
+/Users/Muse/Desktop/SU19-Exercise2/Galaga-Exercise-3/obj/Debug/Galaga-Exercise-3.csproj.CoreCompileInputs.cache
+/Users/Muse/Desktop/SU19-Exercise2/Galaga-Exercise-3/obj/Debug/Galaga-Exercise-3.exe
+/Users/Muse/Desktop/SU19-Exercise2/Galaga-Exercise-3/obj/Debug/Galaga-Exercise-3.pdb
