@@ -17,3 +17,15 @@
 /Users/Muse/Desktop/su19exerciseMuseMikaelFrederik2/SU19-Exercise2/Galaga-Exercise-3/bin/Debug/DIKUArcade.dll
 /Users/Muse/Desktop/su19exerciseMuseMikaelFrederik2/SU19-Exercise2/Galaga-Exercise-3/bin/Debug/OpenTK.dll
 /Users/Muse/Desktop/su19exerciseMuseMikaelFrederik2/SU19-Exercise2/Galaga-Exercise-3/bin/Debug/DIKUArcade.pdb
+/Users/Muse/Desktop/su19exerciseMuseMikaelFrederik2/SU19-Exercise2/Galaga-Exercise-3/bin/Debug/OpenTK.xml
+/home/mikael/Documents/Skole/software/su19exerciseMuseMikaelFrederik2/SU19-Exercise2/Galaga-Exercise-3/bin/Debug/Galaga-Exercise-3.exe
+/home/mikael/Documents/Skole/software/su19exerciseMuseMikaelFrederik2/SU19-Exercise2/Galaga-Exercise-3/bin/Debug/Galaga-Exercise-3.pdb
+/home/mikael/Documents/Skole/software/su19exerciseMuseMikaelFrederik2/SU19-Exercise2/Galaga-Exercise-3/bin/Debug/DIKUArcade.dll
+/home/mikael/Documents/Skole/software/su19exerciseMuseMikaelFrederik2/SU19-Exercise2/Galaga-Exercise-3/bin/Debug/OpenTK.dll
+/home/mikael/Documents/Skole/software/su19exerciseMuseMikaelFrederik2/SU19-Exercise2/Galaga-Exercise-3/bin/Debug/DIKUArcade.pdb
+/home/mikael/Documents/Skole/software/su19exerciseMuseMikaelFrederik2/SU19-Exercise2/Galaga-Exercise-3/bin/Debug/OpenTK.xml
+/home/mikael/Documents/Skole/software/su19exerciseMuseMikaelFrederik2/SU19-Exercise2/Galaga-Exercise-3/obj/Debug/Galaga-Exercise-3.csprojAssemblyReference.cache
+/home/mikael/Documents/Skole/software/su19exerciseMuseMikaelFrederik2/SU19-Exercise2/Galaga-Exercise-3/obj/Debug/Galaga-Exercise-3.csproj.CoreCompileInputs.cache
+/home/mikael/Documents/Skole/software/su19exerciseMuseMikaelFrederik2/SU19-Exercise2/Galaga-Exercise-3/obj/Debug/Galaga-Exercise-3.csproj.CopyComplete
+/home/mikael/Documents/Skole/software/su19exerciseMuseMikaelFrederik2/SU19-Exercise2/Galaga-Exercise-3/obj/Debug/Galaga-Exercise-3.exe
+/home/mikael/Documents/Skole/software/su19exerciseMuseMikaelFrederik2/SU19-Exercise2/Galaga-Exercise-3/obj/Debug/Galaga-Exercise-3.pdb

@@ -49,8 +49,6 @@ namespace Exercise3ny {
                     // Update game logic here
                     GalagaBus.GetBus().ProcessEvents();
                     stateMachine.ActiveState.UpdateGameLogic();
-                    
-
                 }
 
                 if (gameTimer.ShouldRender()) {
@@ -78,8 +76,14 @@ namespace Exercise3ny {
                     win.CloseWindow();
                     break;
                 }
-                
+              
             }
+
+            if (eventType == GameEventType.GameStateEvent) {
+                stateMachine.ProcessEvent(eventType,gameEvent);
+
+            }
+            
             else if (eventType == GameEventType.InputEvent) {
 
                 switch (gameEvent.Parameter1) {
