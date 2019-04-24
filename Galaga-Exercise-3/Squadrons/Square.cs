@@ -11,10 +11,8 @@ namespace Exercise3ny.Squadrons {
         public EntityContainer<Enemy> enemies { get; set; }
         public int MaxEnemies { get; }
         public List<Enemy> listenemy;
-        private IGameState game;
 
-        public Square(IGameState game) {
-            this.game = game;
+        public Square() {
             this.MaxEnemies = 9;
             this.enemies = new EntityContainer<Enemy>(MaxEnemies);
             listenemy=new List<Enemy>();
@@ -22,14 +20,14 @@ namespace Exercise3ny.Squadrons {
         public void CreateEnemies(List<Image> enemyStrides) {
             for (int i = 1; i < 4; i++) {
                 float xposition = i * 0.09f;
-                enemies.AddDynamicEntity(new Enemy(game, new DynamicShape(new Vec2F(xposition, 0.9f),
+                enemies.AddDynamicEntity(new Enemy(new DynamicShape(new Vec2F(xposition, 0.9f),
                     new Vec2F(0.1f, 0.1f)), new ImageStride(80, enemyStrides)));
                 
-                enemies.AddDynamicEntity(new Enemy(game, new DynamicShape(new Vec2F(xposition, 0.8f),
+                enemies.AddDynamicEntity(new Enemy(new DynamicShape(new Vec2F(xposition, 0.8f),
                     new Vec2F(0.1f, 0.1f)), new ImageStride(80, enemyStrides)));
                 
                 
-                enemies.AddDynamicEntity(new Enemy(game, new DynamicShape(new Vec2F(xposition, 0.7f),
+                enemies.AddDynamicEntity(new Enemy(new DynamicShape(new Vec2F(xposition, 0.7f),
                     new Vec2F(0.1f, 0.1f)), new ImageStride(80, enemyStrides)));
             }
         }

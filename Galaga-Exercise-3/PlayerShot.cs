@@ -5,10 +5,8 @@ using DIKUArcade.State;
 
 namespace Exercise3ny {
     public class PlayerShot : Entity {
-        private IGameState game;
         
-        public PlayerShot(IGameState game, DynamicShape shape, IBaseImage image) : base(shape, image) {
-            this.game = game;
+        public PlayerShot(DynamicShape shape, IBaseImage image) : base(shape, image) {
             
             shape.Direction = new Vec2F(0.0f,0.01f);
         }

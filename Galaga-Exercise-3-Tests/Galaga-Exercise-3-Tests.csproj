@@ -42,10 +42,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tests.cs" />
+    <Compile Include="StateMachineTest.cs" />
+    <Compile Include="GameStateTypeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DIKUArcade\DIKUArcade\DIKUArcade.csproj">
+      <Project>{a1e4e4df-0967-4096-9e3c-fbc29b7d07dd}</Project>
+      <Name>DIKUArcade</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Galaga-Exercise-3\Galaga-Exercise-3.csproj">
       <Project>{df5b393e-90dd-4e72-9d05-87c3f61e7f19}</Project>
       <Name>Galaga-Exercise-3</Name>

@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.IO;
 using DIKUArcade.Entities;
 using DIKUArcade.EventBus;
@@ -13,9 +15,9 @@ namespace Exercise3ny.GameStates {
         private int activeMenuButton;
         private int maxMenuButtons;
 
+
     public MainMenu() {
-     InitializeGameState();
-     
+     InitializeGameState();     
     }
     
     public static MainMenu GetInstance() {
@@ -25,22 +27,27 @@ namespace Exercise3ny.GameStates {
     public void GameLoop() { }
 
     public void InitializeGameState() {
-        backGroundImage=new Entity(new StationaryShape(0,0,500,500),new Image(Path.Combine("Assets", "Images",
-            "TitleImage.png")));
+        backGroundImage = new Entity(
+            new StationaryShape(new Vec2F(0.0f, 0.0f), new Vec2F(1.0f, 1.0f)),
+            new Image(Path.Combine("Assets", "Images", "TitleImage.png"))
+        );
+        
         menuButtons = new[] {
-            new Text("new game", new Vec2F(0.6f, 0.6f), new Vec2F(0.2f, 0.2f)),
-            new Text("quit", new Vec2F(0.4f, 0.4f), new Vec2F(0.2f, 0.2f))
+            new Text("new game", new Vec2F(0.4f, 0.5f), new Vec2F(0.3f, 0.3f)),
+            new Text("quit", new Vec2F(0.45f, 0.3f), new Vec2F(0.3f, 0.3f))
         };
         activeMenuButton = 0;
         
-        menuButtons[0].SetText(menuButtons[0].ToString());
+        menuButtons[0].SetText("New Game");
         menuButtons[0].SetColor(new Vec3I(255, 0, 0));
         
-        menuButtons[1].SetText(menuButtons[0].ToString());
-        menuButtons[1].SetColor(new Vec3I(0, 0, 255));
+        menuButtons[1].SetText("Quit");
+        menuButtons[1].SetColor(new Vec3I(0, 255, 0));
     }
 
-    public void UpdateGameLogic() { }
+    public void UpdateGameLogic() {
+
+    }
 
     public void RenderState() {
         
@@ -49,6 +56,7 @@ namespace Exercise3ny.GameStates {
         menuButtons[0].RenderText();
       
         menuButtons[1].RenderText();
+        
     }
 
     public void HandleKeyEvent(string keyValue, string keyAction) {
@@ -56,43 +64,35 @@ namespace Exercise3ny.GameStates {
                 
         case "KEY_PRESS":
             switch (keyAction) {
-            case "KEY_UP":
+            case "KEY_DOWN": case "KEY_S":
                 if (activeMenuButton == 0) {
                     activeMenuButton = 1;
-                } else {
-                    activeMenuButton = 0;
-                }
+                } 
                 break;
-            case "KEY_DOWN": 
+            case "KEY_UP": case "KEY_W":
                 if (activeMenuButton == 1) {
                     activeMenuButton = 0;
-                } else {
-                    activeMenuButton = 1;
-                }
+                } 
                 break;
             
             case "KEY_ENTER":
                 if (activeMenuButton == 0) {
-                    GameEventFactory<object>.CreateGameEventForAllProcessors(
+                   GalagaBus.GetBus().RegisterEvent(GameEventFactory<object>.CreateGameEventForAllProcessors(
                         GameEventType.GameStateEvent,
                         this,
                         "CHANGE_STATE",
-                        "GAME_RUNNING", "");
+                        "GAME_RUNNING", ""));
                 } else
                 {
-                    GameEventFactory<object>.CreateGameEventForAllProcessors(
+                    GalagaBus.GetBus().RegisterEvent(GameEventFactory<object>.CreateGameEventForAllProcessors(
                         GameEventType.WindowEvent,
                         this,
                         "CLOSE_WINDOW",
-                        "", "");
-                   
+                        "", ""));     
                 }
                 
                 break;
-            
-            default:
-                break;
-            
+                        
             }
             break;
         

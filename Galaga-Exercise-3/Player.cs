@@ -49,7 +49,7 @@ namespace Exercise3ny {
 
         Image x = new Image(Path.Combine("Assets", "Images", "BulletRed2.png"));
         public void Shoot() {
-            GameRunning.playerShots.Add(new PlayerShot(game, new DynamicShape(new Vec2F((this.Entity.Shape.Position.X+0.045f), this.Entity.Shape.Position.Y+this.Entity.Shape.Extent.Y),
+            GameRunning.playerShots.Add(new PlayerShot(new DynamicShape(new Vec2F((this.Entity.Shape.Position.X+0.045f), this.Entity.Shape.Position.Y+this.Entity.Shape.Extent.Y),
                 new Vec2F(0.008f,0.027f)),x));
         }
 

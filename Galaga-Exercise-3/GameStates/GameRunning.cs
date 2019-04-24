@@ -18,18 +18,10 @@ namespace Galaga_Exercise_3.GameStates {
     public class GameRunning : IGameState {
         private static GameRunning instance = null;
         public static Player player;
-
         public List<Image> enemyStrides;
-
-
         public List<Enemy> enemies;
-
-
         private List<Image> explosionStrides;
-
-
         private AnimationContainer explosions;
-
         private Score score;
 
         private Triangle t;
@@ -39,7 +31,7 @@ namespace Galaga_Exercise_3.GameStates {
         private Down down;
         private ZigZagDown zzdown;
         public static List<PlayerShot> playerShots { get; private set; }
-        
+
         public GameRunning() {
             InitializeGameState();
 
@@ -64,7 +56,7 @@ namespace Galaga_Exercise_3.GameStates {
                 if (shot.Shape.Position.Y > 1.0f) {
                     shot.DeleteEntity();
                 }
-                
+
                 foreach (Enemy enemy in d.enemies) {
                     if (CollisionDetection.Aabb(shot.Shape.AsDynamicShape(), enemy.Shape)
                         .Collision) {
@@ -103,16 +95,16 @@ namespace Galaga_Exercise_3.GameStates {
             return GameRunning.instance ?? (GameRunning.instance = new GameRunning());
         }
 
-        public void GameLoop() {}
-          
+        public void GameLoop() { }
+
 
         public void InitializeGameState() {
-            t = new Triangle(this);
-            s = new Square(this);
-            d = new Diamond(this);
+            t = new Triangle();
+            s = new Square();
+            d = new Diamond();
             down = new Down();
             zzdown = new ZigZagDown(0.0003f, 0.05f, 0.045f);
-            
+
             player = new Player(this, new DynamicShape(new Vec2F(0.45f, 0.1f),
                 new Vec2F(0.1f, 0.1f)), new Image(Path.Combine("Assets", "Images",
                 "Player.png")));
@@ -129,20 +121,19 @@ namespace Galaga_Exercise_3.GameStates {
             AddEnemies();
 
             playerShots = new List<PlayerShot>();
-            
-           
-            
+
+
         }
 
         public void UpdateGameLogic() {
             player.Move();
             IterateShots();
-            zzdown.MoveEnemies(d.enemies);        
+            zzdown.MoveEnemies(d.enemies);
         }
 
         public void RenderState() {
-            
-            
+
+
             d.enemies.RenderEntities();
             s.enemies.RenderEntities();
             t.enemies.RenderEntities();
@@ -158,6 +149,48 @@ namespace Galaga_Exercise_3.GameStates {
             }
         }
 
-        public void HandleKeyEvent(string keyValue, string keyAction) {}
+        public void HandleKeyEvent(string keyValue, string keyAction) {
+            switch (keyValue) {
+
+            case "KEY_PRESS":
+                switch (keyAction) {
+
+                case "KEY_ESCAPE":
+                    GalagaBus.GetBus().RegisterEvent(GameEventFactory<object>.CreateGameEventForAllProcessors(
+                        GameEventType.GameStateEvent,
+                        this,
+                        "CHANGE_STATE",
+                        "GAME_PAUSED", ""));
+                    break;
+
+                case "KEY_SPACE":
+                    GameRunning.player.Shoot();
+                    break;
+
+                case "KEY_A": case "KEY_D": case "KEY_LEFT": case "KEY_RIGHT":
+                    GameRunning.player.ProcessEvent(GameEventType.PlayerEvent,
+                        GameEventFactory<object>.CreateGameEventForAllProcessors(
+                            GameEventType.PlayerEvent, this,
+                            keyAction == "KEY_A" || keyAction == "KEY_LEFT" ? "LEFT" : "RIGHT",
+                            "", ""));
+                    break;
+
+                }
+
+                break;
+            case "KEY_RELEASE":
+                switch (keyAction) {
+                case "KEY_A": case "KEY_D": case "KEY_LEFT": case "KEY_RIGHT":
+                    GameRunning.player.ProcessEvent(GameEventType.PlayerEvent,
+                        GameEventFactory<object>.CreateGameEventForAllProcessors(
+                            GameEventType.PlayerEvent, this, "RELEASE",
+                            "", ""));
+                    break;
+                }
+
+                break;
+
+            }
+        }
     }
 }

@@ -1,46 +1,55 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
 using DIKUArcade;
+using DIKUArcade.Entities;
 using DIKUArcade.EventBus;
+using DIKUArcade.Graphics;
+using DIKUArcade.Math;
 using DIKUArcade.Timers;
 using Exercise3ny.GameStates;
 using Galaga_Exercise_3.GameStates;
 
-namespace Exercise3ny {
+namespace Exercise3ny { 
+    
+
     public class Game : IGameEventProcessor<object> {
         private Window win;
         private DIKUArcade.Timers.GameTimer gameTimer;
         public StateMachine stateMachine;
-        
-        
-        private GameEventBus<object> eventBus;
 
 
-       
         public Game() {
             win = new Window("Window-name", 500, 500);
             gameTimer = new GameTimer(60, 60);
             stateMachine = new StateMachine();
+            GalagaBus.GetBus().InitializeEventBus(new List<GameEventType>()
+            {
+                GameEventType.WindowEvent,
+                GameEventType.InputEvent,
+                GameEventType.GameStateEvent,
+                GameEventType.PlayerEvent
 
-            
-            
-            eventBus = new GameEventBus<object>();
-            eventBus.InitializeEventBus(new List<GameEventType>() {
-                GameEventType.InputEvent, // key press / key release
-                GameEventType.WindowEvent, // messages to the window
-                GameEventType.PlayerEvent, // Move the player
             });
-            eventBus.Subscribe(GameEventType.InputEvent, this);
-            eventBus.Subscribe(GameEventType.WindowEvent, this);
-            eventBus.Subscribe(GameEventType.PlayerEvent, this);
+        
 
+        GalagaBus.GetBus().Subscribe(GameEventType.WindowEvent, this);
+        GalagaBus.GetBus().Subscribe(GameEventType.PlayerEvent, this);
+        GalagaBus.GetBus().Subscribe(GameEventType.GameStateEvent, this);
+        GalagaBus.GetBus().Subscribe(GameEventType.InputEvent, this);
+
+        win.RegisterEventBus(GalagaBus.GetBus());
         }
 
         public void GameLoop() {
             while (win.IsRunning()) {
                 gameTimer.MeasureTime();
                 while (gameTimer.ShouldUpdate()) {
+                    win.PollEvents();
                     // Update game logic here
+                    GalagaBus.GetBus().ProcessEvents();
                     stateMachine.ActiveState.UpdateGameLogic();
+                    
 
                 }
 
@@ -59,56 +68,31 @@ namespace Exercise3ny {
                 }
             }
         }
-        
-        
-
-        private void KeyPress(string key) {
-            switch (key) {
-            case "KEY_ESCAPE":
-                eventBus.RegisterEvent(
-                    GameEventFactory<object>.CreateGameEventForAllProcessors(
-                        GameEventType.WindowEvent, this, "CLOSE_WINDOW",
-                        "", ""));
-                break;
-            case "KEY_SPACE":
-                GameRunning.player.Shoot();
-                break;
-            case "KEY_A": case "KEY_D": case "KEY_LEFT": case "KEY_RIGHT":
-                GameRunning.player.ProcessEvent(GameEventType.PlayerEvent,GameEventFactory<object>.CreateGameEventForAllProcessors(
-                    GameEventType.PlayerEvent, this,
-                    key == "KEY_A" || key == "KEY_LEFT" ? "LEFT" : "RIGHT",
-                    "", ""));
-                
-                break;
-            }
-        }
-
-        public void KeyRelease(string key) {
-            switch (key) {
-            case "KEY_A": case "KEY_D": case "KEY_LEFT": case "KEY_RIGHT":
-                GameRunning.player.ProcessEvent(GameEventType.PlayerEvent,
-                    GameEventFactory<object>.CreateGameEventForAllProcessors(
-                        GameEventType.PlayerEvent, this, "RELEASE",
-                        "", ""));
-                break;
-            case "KEY_SPACE":
-                break;
-            }
-        }
+       
 
         public void ProcessEvent(GameEventType eventType,
             GameEvent<object> gameEvent) {
-            if (eventType == GameEventType.InputEvent) {
+            if (eventType == GameEventType.WindowEvent) {
+                switch (gameEvent.Message) {
+                case "CLOSE_WINDOW":
+                    win.CloseWindow();
+                    break;
+                }
+                
+            }
+            else if (eventType == GameEventType.InputEvent) {
+
                 switch (gameEvent.Parameter1) {
                 case "KEY_PRESS":
-                    KeyPress(gameEvent.Message);
+                    stateMachine.ActiveState.HandleKeyEvent(gameEvent.Parameter1,gameEvent.Message);
                     break;
                 case "KEY_RELEASE":
-                    KeyRelease(gameEvent.Message);
+                    stateMachine.ActiveState.HandleKeyEvent(gameEvent.Parameter1,gameEvent.Message);
                     break;
                 }
             }
             
-            }
         }
+        }
+        
     }

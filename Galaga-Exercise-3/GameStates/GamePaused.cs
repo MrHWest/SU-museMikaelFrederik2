@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using DIKUArcade.Entities;
 using DIKUArcade.EventBus;
@@ -23,26 +24,30 @@ namespace Exercise3ny.GameStates {
         public void GameLoop() {}
 
         public void InitializeGameState() {
-            pauseImage = new Entity(new StationaryShape(0,0,500,500),
-                new Image(Path.Combine("Assets", "Images", "SpaceBackground.png")));
+            pauseImage = new Entity(
+                new StationaryShape(new Vec2F(0.0f, 0.0f), new Vec2F(1.0f, 1.0f)),
+                new Image(Path.Combine("Assets", "Images", "SpaceBackground.png"))
+            );
+
             pauseButtons = new[] {
-                new Text("Continue", new Vec2F(0.6f, 0.6f), new Vec2F(0.2f, 0.2f)),
-                new Text("Main Menu", new Vec2F(0.4f, 0.4f), new Vec2F(0.2f, 0.2f))
+                new Text("Continue", new Vec2F(0.42f, 0.5f), new Vec2F(0.3f, 0.3f)),
+                new Text("Main Menu", new Vec2F(0.4f, 0.3f), new Vec2F(0.3f, 0.3f))
             };
             activePauseButton = 0;
             
-            pauseButtons[0].SetText(pauseButtons[0].ToString());
+            pauseButtons[0].SetText("Continue");
             pauseButtons[0].SetColor(new Vec3I(255, 0, 0));
             
-            pauseButtons[1].SetText(pauseButtons[0].ToString());
-            pauseButtons[1].SetColor(new Vec3I(0, 0, 255));
+            pauseButtons[1].SetText("Main Menu");
+            pauseButtons[1].SetColor(new Vec3I(0, 255, 0));
         }
 
         public void UpdateGameLogic() {
-            throw new System.NotImplementedException();
         }
 
         public void RenderState() {
+            Console.WriteLine(activePauseButton.ToString());
+
             pauseImage.RenderEntity();
             
             pauseButtons[0].RenderText();
@@ -51,44 +56,46 @@ namespace Exercise3ny.GameStates {
         }
 
         public void HandleKeyEvent(string keyValue, string keyAction) {
-            switch (keyAction) {
-            case "KEY_UP":
-                if (activePauseButton == 0) {
-                    activePauseButton = 1;
-                } else {
-                    activePauseButton = 0;
-                }
-                break;
-            case "KEY_DOWN": 
-                if (activePauseButton == 1) {
-                    activePauseButton = 0;
-                } else {
-                    activePauseButton = 1;
-                }
-                break;
+            switch (keyValue) {
+            case "KEY_PRESS":
+                switch (keyAction) {
+                case "KEY_UP": case "KEY_W":
+                    if (activePauseButton == 1) {
+                        activePauseButton = 0;
+                    } 
+                    break;
+                case "KEY_DOWN": case "KEY_S":
+                    if (activePauseButton == 0) {
+                        activePauseButton = 1;
+                    } 
+                    break;
             
-            case "KEY_ENTER":
-                if (activePauseButton == 0) {
-                    GameEventFactory<object>.CreateGameEventForAllProcessors(
-                        GameEventType.GameStateEvent,
-                        this,
-                        "CHANGE_STATE",
-                        "GAME_RUNNING", "");
-                } else
-                {
-                    GameEventFactory<object>.CreateGameEventForAllProcessors(
-                        GameEventType.GameStateEvent,
-                        this,
-                        "CHANGE_STATE",
-                        "GAME_MAINMENU", "");
+                case "KEY_ENTER":
+                    if (activePauseButton == 0) {
+                        GalagaBus.GetBus().RegisterEvent(GameEventFactory<object>.CreateGameEventForAllProcessors(
+                            GameEventType.GameStateEvent,
+                            this,
+                            "CHANGE_STATE",
+                            "GAME_RUNNING", ""));
+                    } else
+                    {
+                        GalagaBus.GetBus().RegisterEvent(GameEventFactory<object>.CreateGameEventForAllProcessors(
+                            GameEventType.GameStateEvent,
+                            this,
+                            "CHANGE_STATE",
+                            "GAME_MAINMENU", ""));
+                    }                
+                    break;
+            
+           
                 }
-                
-                break;
+                    break;
             
-            default:
-                break;
-            
+            case "KEY_RELEASE":
+                break;   
             }
+           
+                     
         }
     }
 }

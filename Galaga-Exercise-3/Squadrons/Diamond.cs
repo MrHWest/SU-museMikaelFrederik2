@@ -10,29 +10,27 @@ namespace Exercise3ny.Squadrons {
         //Setter added to allow for enemy deletion
         public EntityContainer<Enemy> enemies { get; set; }
         public int MaxEnemies { get; }
-        private IGameState game;
 
-        public Diamond(IGameState game) {
-            this.game = game;
+        public Diamond() {
             this.MaxEnemies = 11;
             this.enemies = new EntityContainer<Enemy>();
         }
 
         public void CreateEnemies(List<Image> enemyStrides) {
             
-            enemies.AddDynamicEntity(new Enemy(game,new DynamicShape(new Vec2F(0.4f, 0.8f),
+            enemies.AddDynamicEntity(new Enemy(new DynamicShape(new Vec2F(0.4f, 0.8f),
                 new Vec2F(0.1f, 0.1f)), new ImageStride(80, enemyStrides)));
             
-            enemies.AddDynamicEntity(new Enemy(game,new DynamicShape(new Vec2F(0.6f, 0.8f),
+            enemies.AddDynamicEntity(new Enemy(new DynamicShape(new Vec2F(0.6f, 0.8f),
                 new Vec2F(0.1f, 0.1f)), new ImageStride(80, enemyStrides)));
             
-            enemies.AddDynamicEntity(new Enemy(game,new DynamicShape(new Vec2F(0.5f, 0.9f),
+            enemies.AddDynamicEntity(new Enemy(new DynamicShape(new Vec2F(0.5f, 0.9f),
                 new Vec2F(0.1f, 0.1f)), new ImageStride(80, enemyStrides)));
             
-            enemies.AddDynamicEntity(new Enemy(game,new DynamicShape(new Vec2F(0.5f, 0.8f),
+            enemies.AddDynamicEntity(new Enemy(new DynamicShape(new Vec2F(0.5f, 0.8f),
                 new Vec2F(0.1f, 0.1f)), new ImageStride(80, enemyStrides)));
             
-            enemies.AddDynamicEntity(new Enemy(game,new DynamicShape(new Vec2F(0.5f, 0.7f),
+            enemies.AddDynamicEntity(new Enemy(new DynamicShape(new Vec2F(0.5f, 0.7f),
                 new Vec2F(0.1f, 0.1f)), new ImageStride(80, enemyStrides)));
         }
     }
