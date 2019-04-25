@@ -24,17 +24,20 @@ namespace Exercise3ny.GameStates {
         public void GameLoop() {}
 
         public void InitializeGameState() {
+    
+
             pauseImage = new Entity(
                 new StationaryShape(new Vec2F(0.0f, 0.0f), new Vec2F(1.0f, 1.0f)),
                 new Image(Path.Combine("Assets", "Images", "SpaceBackground.png"))
             );
-
+          
             pauseButtons = new[] {
                 new Text("Continue", new Vec2F(0.42f, 0.5f), new Vec2F(0.3f, 0.3f)),
-                new Text("Main Menu", new Vec2F(0.4f, 0.3f), new Vec2F(0.3f, 0.3f))
+                new Text("Main Menu", new Vec2F(0.4f, 0.3f), new Vec2F(0.3f, 0.3f)),
             };
             activePauseButton = 0;
             
+        
             pauseButtons[0].SetText("Continue");
             pauseButtons[0].SetColor(new Vec3I(255, 0, 0));
             
@@ -46,13 +49,14 @@ namespace Exercise3ny.GameStates {
         }
 
         public void RenderState() {
-            Console.WriteLine(activePauseButton.ToString());
 
             pauseImage.RenderEntity();
             
             pauseButtons[0].RenderText();
           
             pauseButtons[1].RenderText();
+            
+            
         }
 
         public void HandleKeyEvent(string keyValue, string keyAction) {

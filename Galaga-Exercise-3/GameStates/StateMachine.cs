@@ -9,7 +9,7 @@ namespace Exercise3ny.GameStates {
 
         public StateMachine() {
         
-            ActiveState = MainMenu.GetInstance();
+            ActiveState = GamePaused.GetInstance();
             GalagaBus.GetBus().Subscribe(GameEventType.GameStateEvent, this);
             GalagaBus.GetBus().Subscribe(GameEventType.InputEvent, this);
         }
@@ -17,7 +17,11 @@ namespace Exercise3ny.GameStates {
         public void SwitchState(StateTransformer.GameStateType stateType) {
             switch (stateType) {
             case StateTransformer.GameStateType.GameRunning:
-                ActiveState = GameRunning.GetInstance();
+                if (ActiveState == MainMenu.GetInstance()) {
+                    ActiveState = GameRunning.GetInstance0();
+                } else {
+                    ActiveState = GameRunning.GetInstance();
+                }
                 break;
             case StateTransformer.GameStateType.GamePaused:
                 ActiveState = GamePaused.GetInstance();
@@ -31,7 +35,6 @@ namespace Exercise3ny.GameStates {
         }
 
         public void ProcessEvent(GameEventType eventType, GameEvent<object> gameEvent) {
-            Console.WriteLine("Hello");
             Console.WriteLine("{0}",gameEvent.Parameter1);
 
             if (eventType == GameEventType.GameStateEvent) {
