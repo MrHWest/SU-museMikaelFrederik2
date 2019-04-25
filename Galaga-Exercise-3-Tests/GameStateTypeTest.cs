@@ -4,38 +4,38 @@ using NUnit.Framework;
 
 namespace Galaga_Exercise_3_Tests {
     [TestFixture]
-    public class Tests {
+    public class GameStateTypeTests {
         [Test]
-        public void Test1() {
+        public void TestTransformStateToStringGAME_MAINMENU() {
             Assert.AreSame(StateTransformer.TransformStateToString(
                 StateTransformer.GameStateType.MainMenu),"GAME_MAINMENU");
         }
         [Test]
-        public void Test2() {
+        public void TestTransformStateToStringGAME_PAUSED() {
 
             Assert.AreSame(StateTransformer.TransformStateToString(
                 StateTransformer.GameStateType.GamePaused),"GAME_PAUSED");
         }
         [Test]
-        public void Test3() {
+        public void TestTransformStateToStringGAME_RUNNING() {
 
             Assert.AreSame(StateTransformer.TransformStateToString(
                 StateTransformer.GameStateType.GameRunning),"GAME_RUNNING");
         }
         [Test]
-        public void Test4() {
+        public void TestTransformStringToStateGAME_MAINMENU() {
 
             Assert.AreEqual(StateTransformer.TransformStringToState("GAME_MAINMENU"),
                 StateTransformer.GameStateType.MainMenu);
         }
         [Test]
-        public void Test5() {
+        public void TestTransformStringToStateGAME_PAUSED() {
 
             Assert.AreEqual(StateTransformer.TransformStringToState("GAME_PAUSED"),
                 StateTransformer.GameStateType.GamePaused);
         }
         [Test]
-        public void Test6() {
+        public void TestTransformStringToStateGAME_RUNNING() {
 
             Assert.AreEqual(StateTransformer.TransformStringToState("GAME_RUNNING"),
                 StateTransformer.GameStateType.GameRunning);
