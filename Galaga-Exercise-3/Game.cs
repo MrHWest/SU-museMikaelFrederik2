@@ -88,10 +88,12 @@ namespace Exercise3ny {
 
                 switch (gameEvent.Parameter1) {
                 case "KEY_PRESS":
-                    stateMachine.ActiveState.HandleKeyEvent(gameEvent.Parameter1,gameEvent.Message);
+                    stateMachine.ActiveState.HandleKeyEvent(gameEvent.Parameter1,
+                        gameEvent.Message);
                     break;
                 case "KEY_RELEASE":
-                    stateMachine.ActiveState.HandleKeyEvent(gameEvent.Parameter1,gameEvent.Message);
+                    stateMachine.ActiveState.HandleKeyEvent(gameEvent.Parameter1,
+                        gameEvent.Message);
                     break;
                 }
             }

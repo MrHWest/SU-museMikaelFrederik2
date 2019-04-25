@@ -53,16 +53,7 @@ namespace Exercise3ny.GameStates {
                 }
 
             }
-            else if (eventType == GameEventType.InputEvent) {
-                switch (gameEvent.Parameter1) {
-                case "KEY_PRESS":
-                    ActiveState.HandleKeyEvent(gameEvent.Parameter1,gameEvent.Message);
-                    break;
-                case "KEY_RELEASE":
-                    ActiveState.HandleKeyEvent(gameEvent.Parameter1,gameEvent.Message);
-                    break;
-                }
-            }
+         
             }
         }
     }
