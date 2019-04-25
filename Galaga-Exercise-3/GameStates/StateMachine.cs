@@ -35,7 +35,6 @@ namespace Exercise3ny.GameStates {
         }
 
         public void ProcessEvent(GameEventType eventType, GameEvent<object> gameEvent) {
-            Console.WriteLine("{0}",gameEvent.Parameter1);
 
             if (eventType == GameEventType.GameStateEvent) {
                 
