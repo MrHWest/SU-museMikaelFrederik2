@@ -92,7 +92,7 @@ namespace Galaga_Exercise_3.GameStates {
 
         public static GameRunning GetInstance0() {
            
-            return GameRunning.instance ?? (GameRunning.instance = new GameRunning());
+            return GameRunning.instance = new GameRunning();
         }
 
         public static GameRunning GetInstance() {

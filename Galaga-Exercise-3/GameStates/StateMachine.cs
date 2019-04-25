@@ -9,7 +9,7 @@ namespace Exercise3ny.GameStates {
 
         public StateMachine() {
         
-            ActiveState = GamePaused.GetInstance();
+            ActiveState = MainMenu.GetInstance();
             GalagaBus.GetBus().Subscribe(GameEventType.GameStateEvent, this);
             GalagaBus.GetBus().Subscribe(GameEventType.InputEvent, this);
         }
