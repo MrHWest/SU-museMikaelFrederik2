@@ -9,7 +9,6 @@ namespace Galaga_Exercise_3_Tests {
         [TestFixture]
         public class StateMachineTesting {
             private StateMachine stateMachine;
-            private Game game;
 
             [SetUp]
             public void InitiateStateMachine() {
@@ -23,10 +22,8 @@ namespace Galaga_Exercise_3_Tests {
                     GameEventType.PlayerEvent
 
                 });
-                GalagaBus.GetBus().Subscribe(GameEventType.WindowEvent, game);
-                GalagaBus.GetBus().Subscribe(GameEventType.PlayerEvent, game);
-                GalagaBus.GetBus().Subscribe(GameEventType.InputEvent, game);
-                GalagaBus.GetBus().Subscribe(GameEventType.GameStateEvent, game);
+           
+                GalagaBus.GetBus().Subscribe(GameEventType.GameStateEvent, stateMachine);
 
 
             }

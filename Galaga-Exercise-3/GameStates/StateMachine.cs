@@ -43,11 +43,11 @@ namespace Exercise3ny.GameStates {
                     SwitchState((StateTransformer.TransformStringToState(gameEvent.Parameter1)));
                     break;
                 case "GAME_PAUSED": 
-                    SwitchState((StateTransformer.GameStateType.GamePaused));
+                    SwitchState((StateTransformer.TransformStringToState(gameEvent.Parameter1)));
                     break;
 
                 case "GAME_MAINMENU":
-                    SwitchState((StateTransformer.GameStateType.MainMenu));
+                    SwitchState((StateTransformer.TransformStringToState(gameEvent.Parameter1)));
                     break; 
 
                 }
